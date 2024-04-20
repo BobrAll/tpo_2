@@ -1,5 +1,6 @@
 package bobr;
 
+import bobr.functions.custom.CustomFunc;
 import bobr.functions.logarithmic.Ln;
 import bobr.functions.logarithmic.Log10;
 import bobr.functions.logarithmic.Log5;
@@ -24,24 +25,17 @@ public class App {
     private static final Csc csc = new Csc(sin);
     private static final Cot cot = new Cot(sin, cos);
 
+    private static final CustomFunc customFunc = new CustomFunc(ln, log5, log10, sin, cos, sec, csc, cot);
+
     public static void main(String[] args) throws IOException {
         CsvWriter writer = CsvWriter.builder()
-                .start(0)
-                .finish(500)
-                .step(50)
+                .start(-10)
+                .finish(10)
+                .step(0.01)
                 .delta(DELTA)
                 .build();
 
-//        writer.write(sin, new File( PATH_TO_TABLES + "/sin.csv"));
-//        writer.write(cos, new File(PATH_TO_TABLES + "/cos.csv"));
-//        writer.write(sec, new File(PATH_TO_TABLES + "/sec.csv"));
-//        writer.write(csc, new File(PATH_TO_TABLES + "/csc.csv"));
-//        writer.write(cot, new File(PATH_TO_TABLES + "/cot.csv"));
-//        writer.write(ln, new File(PATH_TO_TABLES + "/ln.csv"));
-//        writer.write(log5, new File(PATH_TO_TABLES + "/log5.csv"));
-//        writer.write(log10, new File(PATH_TO_TABLES + "/log10.csv"));
-//        System.out.println(ln.calc(5d, DELTA));
-//        System.out.println(ln.calc(10d, DELTA));
+        writer.write(customFunc, new File("src/main/resources/result.csv"));
     }
 
 }

@@ -14,12 +14,12 @@ import java.io.IOException;
 
 public class GraphPlotter extends JFrame {
 
-    public GraphPlotter(String title) {
+    public GraphPlotter(String title, String path) {
         super(title);
 
         XYSeries series = new XYSeries("Data");
 
-        try (BufferedReader br = new BufferedReader(new FileReader("result"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
 
             while ((line = br.readLine()) != null) {
@@ -49,7 +49,7 @@ public class GraphPlotter extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            GraphPlotter plotter = new GraphPlotter("Graph Plotter");
+            GraphPlotter plotter = new GraphPlotter("Graph Plotter", "src/main/resources/result.csv");
             plotter.pack();
             plotter.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             plotter.setVisible(true);
